@@ -7,15 +7,22 @@
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-        public static WeatherForecast[] GetWeatherForecast()
+        public static IResult GetWeatherForecast()
         {
-            return Enumerable.Range(1, 5).Select(index =>
+            var weatherForecasts = Enumerable.Range(1, 5).Select(index =>
                 new WeatherForecast(
                     DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                     Random.Shared.Next(-20, 55),
                     Summaries[Random.Shared.Next(Summaries.Length)]
                 ))
                 .ToArray();
+
+            // Return "HI I LOVE YOU" along with the weather forecast as a part of the response
+            return Results.Ok(new
+            {
+                Message = "HI I LOVE YOU",
+                Forecasts = weatherForecasts
+            });
         }
 
         public static IResult GetWeatherForecastById(int id)
