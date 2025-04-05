@@ -1,0 +1,44 @@
+[
+  {
+    "ContainingType": "SimpleApi.WeatherEndpoints",
+    "Method": "GetWeatherForecast",
+    "RelativePath": "weatherforecast/",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "WeatherForecast[]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetWeatherForecast"
+  },
+  {
+    "ContainingType": "SimpleApi.WeatherEndpoints",
+    "Method": "GetWeatherForecastById",
+    "RelativePath": "weatherforecast/{id}",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetWeatherForecastById"
+  }
+]
