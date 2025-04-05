@@ -14,17 +14,17 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout
     
     # Setup .NET
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     
     # Cache NuGet packages for faster builds
     - name: Cache NuGet packages
-      uses: actions/cache@v3
+      uses: actions/cache
       with:
         path: |
           ~/.nuget/packages
@@ -45,7 +45,7 @@ jobs:
     # Upload test results (optional)
     - name: Upload Test Results
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact
       with:
         name: test-results
         path: '**/TestResults/*.trx'
