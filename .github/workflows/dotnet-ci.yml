@@ -14,38 +14,28 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v4  # Added version
+    - uses: actions/checkout@v4
     
-    # Setup .NET
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v4  # Added version
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     
-    # Cache NuGet packages for faster builds
-    - name: Cache NuGet packages
-      uses: actions/cache@v4  # Added version
-      with:
-        path: |
-          ~/.nuget/packages
-          **/bin
-          **/obj
-        key: ${{ runner.os }}-dotnet-${{ hashFiles('**/*.csproj') }}
-        restore-keys: |
-          ${{ runner.os }}-dotnet-
+    - name: Clear NuGet cache
+      run: dotnet nuget locals all --clear
     
-    # Build the solution
+    - name: Restore dependencies
+      run: dotnet restore
+    
     - name: Build
       run: dotnet build --configuration Release --no-restore
     
-    # Run MSTest tests
     - name: Test with MSTest
       run: dotnet test --configuration Release --no-build --logger "trx;LogFileName=test-results.trx"
     
-    # Upload test results (optional)
     - name: Upload Test Results
       if: always()
-      uses: actions/upload-artifact@v4  # Added version
+      uses: actions/upload-artifact@v4
       with:
         name: test-results
         path: '**/TestResults/*.trx'
