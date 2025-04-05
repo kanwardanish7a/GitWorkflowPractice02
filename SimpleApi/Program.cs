@@ -26,6 +26,8 @@ weatherApi.MapGet("/{id}", WeatherEndpoints.GetWeatherForecastById)
           .WithName("GetWeatherForecastById")
           .WithOpenApi();
 
+app.MapGet("/lovemessage", WeatherEndpoints.GetLoveMessage);
+
 app.Run();
 
 // Make the WeatherForecast record accessible to tests
